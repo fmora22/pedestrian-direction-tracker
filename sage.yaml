@@ -11,12 +11,12 @@ keywords: "pedestrian, people-tracking, YOLOv8, ByteTrack, edge AI, education"
 homepage: ""
 
 source:
+  url: "https://github.com/uic-evl/pedestrian-direction-tracker"
+  branch: "main"
+  dockerfile: "Dockerfile"
+  directory: ""
   architectures:
     - "linux/amd64"
-source:
-  architectures:
-    - "linux/amd64"
-  url: "https://github.com/fmora22/pedestrian-direction-tracker.git"
 
 inputs:
   - id: "stream"
