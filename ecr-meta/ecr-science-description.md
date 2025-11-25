@@ -1,15 +1,17 @@
 ## Science
 
-This application demonstrates how edge computing can be used to perform real-time pedestrian flow analysis using YOLOv8 and a lightweight tracker. By detecting people and estimating their left-versus-right movement across a scene, the system provides continuous insight into how humans move through spaces such as hallways, sidewalks, campus pathways, and transit areas.
+This application is primarily designed as an educational activity that teaches students how edge computing works in real time. By running YOLOv8 detection and simple movement tracking directly on an edge device, students gain hands on experience with video processing, object detection, tracking, and publishing metadata on a live system. The goal is to help learners understand the core ideas behind artificial intelligence at the edge through a simple and approachable movement tracking task.
 
-The scientific relevance lies in enabling **low-latency observation of movement patterns** without streaming full video to the cloud. This supports research and applications in:
+In addition to its instructional purpose, this application also demonstrates how edge devices can be used for real time pedestrian flow analysis. By detecting people and estimating whether they move left or right across a scene, the system provides continuous insight into how individuals navigate hallways, sidewalks, campus paths, or crowded spaces without sending full video feeds to the cloud.
+
+The scientific value of this tool extends to several areas of research and practice including:
 
 * crowd safety and congestion monitoring
-* space utilization and urban planning
-* behavioral and environmental studies
-* smart-infrastructure and sensor network design
+* analysis of space usage in urban and campus environments
+* behavioral and environmental movement studies
+* design of intelligent infrastructure and sensor networks
 
-This app is also designed as an **educational instructional activity**. It helps students understand how edge AI systems work by showing how object detection, tracking, and metadata publishing can run directly on edge devices like Thor, connecting core concepts in AI@Edge to a simple movement-tracking task.
+Processing happens directly on the device which allows low latency observations, efficient use of bandwidth, and improved privacy. This makes the tool useful both for teaching and for real world applications that benefit from artificial intelligence at the edge.
 
 ---
 
