@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# left-right-tracker (ecr version)
+# pedestrian-direction-tracker (ecr version)
 # - stream-first: use STREAM (file / rtsp / http) if set
 # - optional camera fallback via waggle Camera()
 # - yolo v8 + ultralytics bytetrack for people tracking
@@ -27,7 +27,7 @@ from waggle.data.vision import Camera
 def str2bool(x):
     return str(x).lower() in {"1", "true", "t", "yes", "y"}
 
-parser = argparse.ArgumentParser(description="left-right-tracker ecr version")
+parser = argparse.ArgumentParser(description="pedestrian-direction-tracker ecr version")
 
 parser.add_argument("--stream",
                     default=os.getenv("STREAM", ""),
@@ -166,10 +166,13 @@ def log_stats(direction=None, x_start=None, x_end=None):
                 ram_used = int(ram_match.group(1))
                 ram_total = int(ram_match.group(2))
 
-            # gpu % (jetson)
+            # gpu % (jetson) - try GR3D_FREQ first, fallback to other GPU indicators
             gpu_match = re.search(r"GR3D_FREQ (\d+)%", out)
             if gpu_match:
                 gpu_util = int(gpu_match.group(1))
+            else:
+                # Some Jetson systems don't report GR3D_FREQ - leave as None
+                gpu_util = None
 
             # cpu %
             cpu_match = re.search(r"CPU \[([^\]]+)\]", out)
@@ -179,15 +182,14 @@ def log_stats(direction=None, x_start=None, x_end=None):
                     core_usages = list(map(int, core_usages))
                     cpu_util = sum(core_usages) / len(core_usages)
 
-            # temps
-            temps = {
-                "cpu": re.search(r"cpu@([\d\.]+)C", out),
-                "gpu": re.search(r"gpu@([\d\.]+)C", out),
-            }
-            temps_parsed = {
-                k: float(v.group(1)) if v else None
-                for k, v in temps.items()
-            }
+            # temps - use raw string with proper decimal matching
+            cpu_temp_match = re.search(r"cpu@([\d\.]+)C", out)
+            gpu_temp_match = re.search(r"gpu@([\d\.]+)C", out)
+            
+            if cpu_temp_match:
+                temps_parsed["cpu"] = float(cpu_temp_match.group(1))
+            if gpu_temp_match:
+                temps_parsed["gpu"] = float(gpu_temp_match.group(1))
 
             tegra_ok = True
 
