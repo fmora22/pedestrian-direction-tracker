@@ -1,6 +1,6 @@
 name: "pedestrian-direction-tracker"
 namespace: "sage"
-version: "0.1.0"
+version: "1.0.0"
 
 description: "Pedestrian-Direction-Tracker uses YOLOv8 + built-in tracking to estimate simple pedestrian flow (left vs right) from either a Waggle camera or a video/RTSP stream."
 authors: "Michael Cortez; Om Patel; Elizabeth Cardoso; Fatima Mora Garcia;"
@@ -16,7 +16,7 @@ source:
 source:
   architectures:
     - "linux/amd64"
-  url: ""
+  url: "https://github.com/fmora22/pedestrian-direction-tracker.git"
 
 inputs:
   - id: "stream"
